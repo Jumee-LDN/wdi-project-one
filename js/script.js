@@ -1,8 +1,10 @@
+alert('hi');
+
 
 const $body = $('body');
 
 
-function grid(rows, cols){
+function gridGenerator(rows, cols){
   const $container = $('<table></table>');
   $body.append($container);
   $container.addClass('grid');
@@ -25,4 +27,4 @@ function grid(rows, cols){
 
 }
 
-grid(5,5);
+gridGenerator(10,10);
