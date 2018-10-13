@@ -6,15 +6,22 @@ h1{
 }
 
 .grid-box {
-  max-width: 50px;
-  min-width: 30px;
-  width: 30px;
-  max-height: 50px;
-  min-height: 30px;
-  height: 30px;
+
+  width: 4rem;
+
+  height: 4rem;
+  position: relative;
   border:1px solid #ccc;
   text-align:center;
   font-family:sans-serif;
   font-size:13px;
-  background-color: pink;
+  background-color: peru;
+}
+
+#lizard {
+  width: 100%;
+  height: auto;
+  top: 0;
+  left: 0;
+  position: absolute;
 }

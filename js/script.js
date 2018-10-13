@@ -1,43 +1,35 @@
 
 
 const $body = $('body');
+const $lizardImg = $('#lizard');
+let $currentLizardPosition = $();
+
 
 function gameStart(){
-  gridGenerator(10,10);
+  gridGenerator(5,5);
   pickRandomLizardPosition();
 }
 
 gameStart();
 
+
 function pickRandomLizardPosition(){
-  const $lastRow = $( 'table tr:last-child' );
-
-  // first td
-  // $lastRow[0].cells[1];
+  const $lastRow = $('table tr:last-child');
+  // first td of the last tr ==> $lastRow[0].cells[1];
   const lastRowLength = $lastRow[0].cells.length;
-  const randomNum = Math.floor(Math.random() * lastRowLength);
-  //random td
-  const $lizardPosition = $($lastRow[0].cells[randomNum]);
+  const randomLizardPosition = Math.floor(Math.random() * lastRowLength);
 
-  //***********add class to make bg colour ****************
+  $currentLizardPosition = $($lastRow[0].cells[randomLizardPosition]);
+  $currentLizardPosition.prepend('<img id="lizard" src="https://www.freeiconspng.com/uploads/lizard-icon-30.png" />');
+  $lizardImg.addClass('lizard');
+  console.log($currentLizardPosition);
 
-  console.log($lizardPosition);
 }
 
 
+// *********CHANGE LIZARD POSITION BY KEY**************
 
 
-
-// class LizardObjCreator {
-//   constructor(div) {
-//     this.div = div;
-//   }
-//   createLizard(){
-//     const $lizardDiv = $('<div></div>');
-//     //choose random td on the last tr
-//
-//   }
-// }
 
 function gridGenerator(rows, cols){
   const $container = $('<table></table>');
