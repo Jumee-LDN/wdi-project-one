@@ -1,83 +1,42 @@
 const $body = $('body');
 const $lizardImg = $('#lizard');
+const $messageBox = $('.message-box');
 let $currentBoxObject = $();
 let $newLizardObject = $();
+const $buttonObject = $('.button');
+let $winningRow;
+
 let currentId;
 let lizardArr = [];
 
+let clickedStatus = false;
 
-function gameStart(){
-  gridGenerator(8,5);
-  pickRandomSpotForLizard();
+// function gameStart(){
+//   gridGenerator(8,15);
+//   setButton();
+//   // lizardOnWinningRow();
+// }
+//
+// gameStart();
+gridGenerator(8,15);
+setButton();
 
+
+function setButton() {
+  $buttonObject.click(function() {
+    clickedStatus = !clickedStatus;
+
+    if(clickedStatus){
+      console.log('start button clicked');
+      pickRandomSpotForLizard();
+      $buttonObject[0].textContent = 'Run!';
+    } else {
+      console.log('clicked again');
+      $buttonObject[0].textContent = 'Restart';
+      removeLizardInArray();
+    }
+  });
 }
-
-gameStart();
-
-
-function pickRandomSpotForLizard(){
-  const $lastRow = $('table tr:last-child');
-  // first td of the last tr ==> $lastRow[0].cells[1];
-  const lastRowLength = $lastRow[0].cells.length;
-  const randomBox = Math.floor(Math.random() * lastRowLength);
-
-  $currentBoxObject = $($lastRow[0].cells[randomBox]);
-  console.log($currentBoxObject);
-
-  placeLizardObjectInArray($currentBoxObject);
-}
-
-
-function placeLizardObjectInArray(lizardPosition){
-  // lizardArr[0][0].childNodes[0].remove();
-  // const lizardImageToRemove = lizardArr[0][0].childNodes[0];
-  // lizardImageToRemove.remove();
-  // lizardArr.pop();
-  lizardArr.push(lizardPosition);
-  addLizardImg();
-}
-
-function addLizardImg(){
-  lizardArr[0].prepend('<img id="lizard" src="https://www.freeiconspng.com/uploads/lizard-icon-30.png" />');
-  lizardArr[0].addClass('lizard');
-}
-
-function removeLizardInArray(){
-  const lizardImageToRemove = lizardArr[0][0].childNodes[0];
-  lizardImageToRemove.remove();
-  lizardArr.pop();
-  $currentBoxObject.removeClass('lizard');
-}
-
-// *********CHANGE LIZARD POSITION BY KEY**************
-
-function moveLizardLeft(){
-  currentId = parseInt($currentBoxObject.attr('id'));
-  const newId = --currentId;
-  removeLizardInArray();
-  // $currentBoxObject.attr('id',newId);
-  $currentBoxObject = $(`td#${newId}.grid-box`);
-  placeLizardObjectInArray($currentBoxObject);
-}
-
-function moveLizardRight(){
-  currentId = parseInt($currentBoxObject.attr('id'));
-  const newId = ++currentId;
-  removeLizardInArray();
-  // $currentBoxObject.attr('id',newId);
-  $currentBoxObject = $(`td#${newId}.grid-box`);
-  placeLizardObjectInArray($currentBoxObject);
-}
-
-function moveLizardUp(){
-  currentId = parseInt($currentBoxObject.attr('id'));
-  const newId = currentId-5;
-  removeLizardInArray();
-  // $currentBoxObject.attr('id',newId);
-  $currentBoxObject = $(`td#${newId}.grid-box`);
-  placeLizardObjectInArray($currentBoxObject);
-}
-
 
 function gridGenerator(rows, cols){
   const $container = $('<table></table>');
@@ -110,8 +69,130 @@ function gridGenerator(rows, cols){
         $($rows[rowNum].children[s]).addClass('rock');
       }
     }
+    $winningRow = $($rows[rowNum])[0];
   }
   seaAreaGenerator(2);
-
-
 }
+
+
+function pickRandomSpotForLizard(){
+  const $lastRow = $('table tr:last-child');
+  // first td of the last tr ==> $lastRow[0].cells[1];
+  const lastRowLength = $lastRow[0].cells.length;
+  const randomBox = Math.floor(Math.random() * lastRowLength);
+
+  $currentBoxObject = $($lastRow[0].cells[randomBox]);
+  console.log($currentBoxObject);
+
+  placeLizardObjectInArray($currentBoxObject);
+}
+
+
+function placeLizardObjectInArray(lizardPosition){
+  lizardArr.push(lizardPosition);
+  addLizardImg();
+}
+
+function addLizardImg(){
+  lizardArr[0].prepend('<img id="lizard" src="https://www.freeiconspng.com/uploads/lizard-icon-30.png" />');
+  lizardArr[0].addClass('lizard');
+}
+
+function removeLizardInArray(){
+  const lizardImageToRemove = lizardArr[0][0].childNodes[0];
+  lizardImageToRemove.remove();
+  lizardArr = [];
+  $currentBoxObject.removeClass('lizard');
+}
+
+// *********CHANGE LIZARD POSITION BY KEY**************
+// https://stackoverflow.com/questions/29118791/how-to-move-an-element-via-arrow-keys-continuously-smoothly
+
+
+//store key codes and currently pressed ones
+const keys = {
+  UP: 38,
+  LEFT: 37,
+  RIGHT: 39,
+  DOWN: 40
+};
+
+// key detection (better to use addEventListener??)
+onkeyup = onkeydown = function(event){
+  // prevent default browser handling of keypresses
+  if (event.preventDefault) {
+    event.preventDefault();
+  } else {
+    event.returnValue = false;
+  }
+  const kc = event.keyCode || event.which;
+  keys[kc] = event.type === 'keydown';
+};
+
+// character control
+const detectCharacterMovement = function(){
+  if ( keys[keys.LEFT] ) {
+    moveLizardLeft();
+    lizardOnWinningRow();
+  }
+  if ( keys[keys.RIGHT] ) {
+    moveLizardRight();
+    lizardOnWinningRow();
+  }
+  if ( keys[keys.UP] ) {
+    moveLizardUp();
+    lizardOnWinningRow();
+  }
+  if ( keys[keys.DOWN] ) {
+    console.log('No turning back!');
+    // moveLizardDown();
+  } else {
+    return 'wrong key';
+  }
+};
+
+// game loop
+const intervalId = setInterval(function(){
+  detectCharacterMovement();
+}, 1000/8);
+
+function moveLizardLeft(){
+  currentId = parseInt($currentBoxObject.attr('id'));
+  const newId = --currentId;
+  removeLizardInArray();
+  // $currentBoxObject.attr('id',newId);
+  $currentBoxObject = $(`td#${newId}.grid-box`);
+  placeLizardObjectInArray($currentBoxObject);
+}
+
+function moveLizardRight(){
+  currentId = parseInt($currentBoxObject.attr('id'));
+  const newId = ++currentId;
+  removeLizardInArray();
+  // $currentBoxObject.attr('id',newId);
+  $currentBoxObject = $(`td#${newId}.grid-box`);
+  placeLizardObjectInArray($currentBoxObject);
+}
+
+function moveLizardUp(){
+  currentId = parseInt($currentBoxObject.attr('id'));
+  const newId = currentId-15;
+  removeLizardInArray();
+  // $currentBoxObject.attr('id',newId);
+  $currentBoxObject = $(`td#${newId}.grid-box`);
+  placeLizardObjectInArray($currentBoxObject);
+}
+
+function lizardOnWinningRow(){
+  const $winningRowBoxes = $winningRow.children;
+  $($winningRowBoxes).each(function(){
+    let boxId = this.id;
+    
+    if(boxId === $currentBoxObject[0].id){
+      $messageBox[0].textContent = '👍 You saved the baby lizard! 👍';
+      clearInterval(intervalId);
+    }
+  });
+}
+
+// Snake Generator

@@ -1,19 +1,64 @@
+body{
+  font-family: 'Nunito', sans-serif;
+}
+
+
 h1{
   text-align: center;
+  font-size: 3rem;
+  font-weight: 900;
 }
+.wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 5rem;
+}
+
+.button {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  font-weight: 900;
+  width: 5rem;
+  height: 3rem;
+  background-color: lightskyblue;
+  border-radius: 20px;
+  border-style: none;
+  outline: none;
+  margin: 0 15px;
+}
+
+.message-box {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  width: 20rem;
+  height: 3rem;
+  border-radius: 20px;
+  border: 3px solid lightskyblue;
+  color: lightskyblue;
+  margin: 0 15px;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 5px;
+  line-height: 2rem;
+}
+
 .grid{
   margin: 0 auto;
+  border-collapse:collapse;
 }
 
 .grid-box {
-  width: 4rem;
-  height: 4rem;
+  width: 2.5rem;
+  height: 2.5rem;
   position: relative;
-  border:1px solid #ccc;
+  border: 0.5px solid #ccc;
   text-align:center;
   font-family:sans-serif;
-  font-size:13px;
-  background-color: peru;
+  font-size: 10px;
+  color: black;
+  background-color: darkgoldenrod;
 }
 
 .sea {
