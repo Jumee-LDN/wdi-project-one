@@ -6,8 +6,6 @@ let currentId;
 let lizardArr = [];
 
 
-
-
 function gameStart(){
   gridGenerator(8,5);
   pickRandomSpotForLizard();
@@ -29,11 +27,6 @@ function pickRandomSpotForLizard(){
   placeLizardObjectInArray($currentBoxObject);
 }
 
-function addLizardImg(){
-  lizardArr[0].prepend('<img id="lizard" src="https://www.freeiconspng.com/uploads/lizard-icon-30.png" />');
-  lizardArr[0].addClass('lizard');
-}
-
 
 function placeLizardObjectInArray(lizardPosition){
   // lizardArr[0][0].childNodes[0].remove();
@@ -42,6 +35,11 @@ function placeLizardObjectInArray(lizardPosition){
   // lizardArr.pop();
   lizardArr.push(lizardPosition);
   addLizardImg();
+}
+
+function addLizardImg(){
+  lizardArr[0].prepend('<img id="lizard" src="https://www.freeiconspng.com/uploads/lizard-icon-30.png" />');
+  lizardArr[0].addClass('lizard');
 }
 
 function removeLizardInArray(){
@@ -54,22 +52,32 @@ function removeLizardInArray(){
 // *********CHANGE LIZARD POSITION BY KEY**************
 
 function moveLizardLeft(){
-  currentId = parseInt($newLizardObject.attr('id'));
+  currentId = parseInt($currentBoxObject.attr('id'));
   const newId = --currentId;
   removeLizardInArray();
   // $currentBoxObject.attr('id',newId);
-  $newLizardObject = $(`td#${newId}.grid-box`);
-  placeLizardObjectInArray($newLizardObject);
+  $currentBoxObject = $(`td#${newId}.grid-box`);
+  placeLizardObjectInArray($currentBoxObject);
 }
 
 function moveLizardRight(){
-  currentId = parseInt($newLizardObject.attr('id'));
+  currentId = parseInt($currentBoxObject.attr('id'));
   const newId = ++currentId;
   removeLizardInArray();
   // $currentBoxObject.attr('id',newId);
-  $newLizardObject = $(`td#${newId}.grid-box`);
-  placeLizardObjectInArray($newLizardObject);
+  $currentBoxObject = $(`td#${newId}.grid-box`);
+  placeLizardObjectInArray($currentBoxObject);
 }
+
+function moveLizardUp(){
+  currentId = parseInt($currentBoxObject.attr('id'));
+  const newId = currentId-5;
+  removeLizardInArray();
+  // $currentBoxObject.attr('id',newId);
+  $currentBoxObject = $(`td#${newId}.grid-box`);
+  placeLizardObjectInArray($currentBoxObject);
+}
+
 
 function gridGenerator(rows, cols){
   const $container = $('<table></table>');
@@ -92,15 +100,18 @@ function gridGenerator(rows, cols){
   }
 
   const $rows = $('table > tr');
-  const $firstRow = $('table tr:first-child');
+  const $firstRow = $('tr:eq( 0 )');
   const $firstRowLength = $firstRow[0].children.length;
 
   function seaAreaGenerator(rowNum){
     for(let r = 0; r < rowNum; r++){
       for(let s = 0; s < $firstRowLength; s++){
         $($rows[r].children[s]).addClass('sea');
+        $($rows[rowNum].children[s]).addClass('rock');
       }
     }
   }
   seaAreaGenerator(2);
+
+
 }
