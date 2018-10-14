@@ -1,35 +1,75 @@
-
-
 const $body = $('body');
 const $lizardImg = $('#lizard');
-let $currentLizardPosition = $();
+let $currentBoxObject = $();
+let $newLizardObject = $();
+let currentId;
+let lizardArr = [];
+
+
 
 
 function gameStart(){
-  gridGenerator(5,5);
-  pickRandomLizardPosition();
+  gridGenerator(8,5);
+  pickRandomSpotForLizard();
+
 }
 
 gameStart();
 
 
-function pickRandomLizardPosition(){
+function pickRandomSpotForLizard(){
   const $lastRow = $('table tr:last-child');
   // first td of the last tr ==> $lastRow[0].cells[1];
   const lastRowLength = $lastRow[0].cells.length;
-  const randomLizardPosition = Math.floor(Math.random() * lastRowLength);
+  const randomBox = Math.floor(Math.random() * lastRowLength);
 
-  $currentLizardPosition = $($lastRow[0].cells[randomLizardPosition]);
-  $currentLizardPosition.prepend('<img id="lizard" src="https://www.freeiconspng.com/uploads/lizard-icon-30.png" />');
-  $lizardImg.addClass('lizard');
-  console.log($currentLizardPosition);
+  $currentBoxObject = $($lastRow[0].cells[randomBox]);
+  console.log($currentBoxObject);
 
+  placeLizardObjectInArray($currentBoxObject);
+}
+
+function addLizardImg(){
+  lizardArr[0].prepend('<img id="lizard" src="https://www.freeiconspng.com/uploads/lizard-icon-30.png" />');
+  lizardArr[0].addClass('lizard');
 }
 
 
+function placeLizardObjectInArray(lizardPosition){
+  // lizardArr[0][0].childNodes[0].remove();
+  // const lizardImageToRemove = lizardArr[0][0].childNodes[0];
+  // lizardImageToRemove.remove();
+  // lizardArr.pop();
+  lizardArr.push(lizardPosition);
+  addLizardImg();
+}
+
+function removeLizardInArray(){
+  const lizardImageToRemove = lizardArr[0][0].childNodes[0];
+  lizardImageToRemove.remove();
+  lizardArr.pop();
+  $currentBoxObject.removeClass('lizard');
+}
+
 // *********CHANGE LIZARD POSITION BY KEY**************
 
+function moveLizardLeft(){
+  currentId = parseInt($newLizardObject.attr('id'));
+  const newId = --currentId;
+  removeLizardInArray();
+  // $currentBoxObject.attr('id',newId);
+  $newLizardObject = $(`td#${newId}.grid-box`);
+  placeLizardObjectInArray($newLizardObject);
+}
 
+function moveLizardRight(){
+  currentId = parseInt($newLizardObject.attr('id'));
+  const newId = ++currentId;
+  removeLizardInArray();
+  // $currentBoxObject.attr('id',newId);
+  $newLizardObject = $(`td#${newId}.grid-box`);
+  placeLizardObjectInArray($newLizardObject);
+}
 
 function gridGenerator(rows, cols){
   const $container = $('<table></table>');
@@ -42,13 +82,25 @@ function gridGenerator(rows, cols){
     $container.append($tr);
     $tr.attr('id', 'row'+ r);
 
-
     for(let c = 0; c < cols; c++){
       const $td = $('<td></td>');
       $tr.append($td);
-      $td.attr('id', 'box'+ i);
+      $td.attr('id', i);
       $td.addClass('grid-box');
       $td.append(i++);
     }
   }
+
+  const $rows = $('table > tr');
+  const $firstRow = $('table tr:first-child');
+  const $firstRowLength = $firstRow[0].children.length;
+
+  function seaAreaGenerator(rowNum){
+    for(let r = 0; r < rowNum; r++){
+      for(let s = 0; s < $firstRowLength; s++){
+        $($rows[r].children[s]).addClass('sea');
+      }
+    }
+  }
+  seaAreaGenerator(2);
 }
