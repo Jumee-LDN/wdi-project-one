@@ -99,3 +99,7 @@ h1{
 #snake-head {
   font-size: 1.5rem;
 }
+
+.snake {
+  background-color: green;
+}
