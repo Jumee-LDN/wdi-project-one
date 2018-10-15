@@ -1,24 +1,28 @@
 const $body = $('body');
-const $snakeHeadImg = $('#snake-head');
 const $messageBox = $('.message-box');
-let $currentBoxObject = $();
-let $newLizardObject = $();
+const $snakeHeadImg = $('#snake-head');
 const $buttonObject = $('.button');
-let scoreNum = 0;
 let $winningRow;
+let $currentLizardObject = $();
 
-let currentId;
+const imageArray = [
+  {
+    name: 'lizard',
+    src: '<img id="lizard" src="https://www.freeiconspng.com/uploads/lizard-icon-30.png" />'
+  }
+];
+let scoreNum = 0;
 let lizardArr = [];
-
 let clickedStatus = false;
-let intervalId;
+let currentId;
 let snakeMovementIntervalId;
 
+const intervalId = setInterval(function(){
+  gameLoop();
+}, 1000/5);
 
-gridGenerator(8,15);
+gridGenerator(10,15);
 setButton();
-
-
 function setButton() {
   $buttonObject.click(function() {
     clickedStatus = !clickedStatus;
@@ -26,18 +30,15 @@ function setButton() {
     if (clickedStatus) {
       console.log('start button clicked');
       pickRandomSpotForLizard();
+      setLizardImgIn();
+      storeCurrentLizardObjectInArray($currentLizardObject);
       snakeGenerator();
-
-      // game loop
-      intervalId = setInterval(function(){
-        gameLoop();
-      }, 1000/5);
-
       $buttonObject[0].textContent = 'Reset';
     } else {
       console.log('clicked again');
       $buttonObject[0].textContent = 'Run';
-      removeLizardInArray();
+
+      removeLizardImg();
       $('div.score-box > span')[0].textContent = 0;
       $messageBox[0].textContent = '🦎🦎🦎 Save baby lizards! 🦎🦎🦎';
       $messageBox.css( {
@@ -87,32 +88,24 @@ function gridGenerator(rows, cols){
 
 function pickRandomSpotForLizard(){
   const $lastRow = $('table tr:last-child');
-  // first td of the last tr ==> $lastRow[0].cells[1];
   const lastRowLength = $lastRow[0].cells.length;
-  const randomBox = Math.floor(Math.random() * lastRowLength);
+  const randomBoxNumber = Math.floor(Math.random() * lastRowLength);
 
-  $currentBoxObject = $($lastRow[0].cells[randomBox]);
-  console.log($currentBoxObject);
-
-  placeLizardObjectInArray($currentBoxObject);
+  $currentLizardObject = $($lastRow[0].cells[randomBoxNumber]);
+  console.log('$currentLizardObject is :', $currentLizardObject);
+  // placeLizardObjectInArray($currentLizardObject);
 }
 
-
-function placeLizardObjectInArray(lizardPosition){
-  lizardArr.push(lizardPosition);
-  addLizardImg();
+function setLizardImgIn(){
+  $currentLizardObject.prepend(imageArray[0].src);
 }
 
-function addLizardImg(){
-  lizardArr[0].prepend('<img id="lizard" src="https://www.freeiconspng.com/uploads/lizard-icon-30.png" />');
-  lizardArr[0].addClass('lizard');
+function storeCurrentLizardObjectInArray(Object){
+  lizardArr.push(Object);
 }
 
-function removeLizardInArray(){
-  const lizardImageToRemove = lizardArr[0][0].childNodes[0];
-  lizardImageToRemove.remove();
-  lizardArr = [];
-  $currentBoxObject.removeClass('lizard');
+function removeLizardImg(){
+  $currentLizardObject[0].firstElementChild.remove();
 }
 
 // *********CHANGE LIZARD POSITION BY KEY**************
@@ -128,19 +121,15 @@ const keys = {
 
 // key detection (better to use addEventListener??)
 onkeyup = onkeydown = function(event){
-  // prevent default browser handling of keypresses
-  // if (event.preventDefault) {
-  //   event.preventDefault();
-  // } else {
-  //   event.returnValue = false;
-  // }
   const kc = event.keyCode || event.which;
   keys[kc] = event.type === 'keydown';
 };
 
 // character control
 const gameLoop = function(){
+
   moveSnakes();
+
   if ( keys[keys.LEFT] ) {
     moveLizardLeft();
     lizardOnWinningRow();
@@ -162,38 +151,42 @@ const gameLoop = function(){
 };
 
 function moveLizardLeft(){
-  currentId = parseInt($currentBoxObject.attr('id'));
+  currentId = parseInt($currentLizardObject.attr('id'));
   const newId = --currentId;
-  removeLizardInArray();
-  // $currentBoxObject.attr('id',newId);
-  $currentBoxObject = $(`td#${newId}.grid-box`);
-  placeLizardObjectInArray($currentBoxObject);
+  removeLizardImg();
+  // $currentLizardObject.attr('id',newId);
+  $currentLizardObject = $(`td#${newId}.grid-box`);
+  setLizardImgIn();
+  storeCurrentLizardObjectInArray($currentLizardObject);
 }
 
 function moveLizardRight(){
-  currentId = parseInt($currentBoxObject.attr('id'));
+  currentId = parseInt($currentLizardObject.attr('id'));
   const newId = ++currentId;
-  removeLizardInArray();
-  // $currentBoxObject.attr('id',newId);
-  $currentBoxObject = $(`td#${newId}.grid-box`);
-  placeLizardObjectInArray($currentBoxObject);
+  removeLizardImg();
+  // $currentLizardObject.attr('id',newId);
+  $currentLizardObject = $(`td#${newId}.grid-box`);
+  setLizardImgIn();
+  storeCurrentLizardObjectInArray($currentLizardObject);
 }
 
 function moveLizardUp(){
-  currentId = parseInt($currentBoxObject.attr('id'));
+  currentId = parseInt($currentLizardObject.attr('id'));
   const newId = currentId-15;
-  removeLizardInArray();
-  // $currentBoxObject.attr('id',newId);
-  $currentBoxObject = $(`td#${newId}.grid-box`);
-  placeLizardObjectInArray($currentBoxObject);
+  removeLizardImg();
+  // $currentLizardObject.attr('id',newId);
+  $currentLizardObject = $(`td#${newId}.grid-box`);
+  setLizardImgIn();
+  storeCurrentLizardObjectInArray($currentLizardObject);
 }
 
 function lizardOnWinningRow(){
+  lizardArr = [];
   const $winningRowBoxes = $winningRow.children;
   $($winningRowBoxes).each(function(){
-    let boxId = this.id;
+    const boxId = this.id;
 
-    if(boxId === $currentBoxObject[0].id){
+    if(boxId === $currentLizardObject[0].id){
       $messageBox.css({
         'background-color': 'lightskyblue',
         'color': 'white'
@@ -201,12 +194,20 @@ function lizardOnWinningRow(){
       $messageBox[0].textContent = '👍 You saved the baby lizard! 👍';
       scoreNum++;
       $('div.score-box > span')[0].textContent = scoreNum;
-      clearInterval(intervalId);
+      removeLizardImg();
+
+      setTimeout(function(){
+        snakeGenerator();
+        pickRandomSpotForLizard();
+        setLizardImgIn();
+        storeCurrentLizardObjectInArray($currentLizardObject);
+      }, 1000);
+      // clearInterval(intervalId);
     }
   });
 }
 
-let firstColArr = [];
+let startLineNumbersArray = [];
 let snakeArr = [];
 const $td = $('td');
 const $tr = $('tr');
@@ -221,27 +222,27 @@ function snakeGenerator(){
 function pickRandomSpotForSnake(){
   for(let n = 0; n < $td.length; n++){
     if ((n % 15) === 0){
-      firstColArr.push($($td[n]));
+      startLineNumbersArray.push($($td[n]));
     }
     // else if ((n + 1) % 15 === 0){
     //   console.log('this is lastchild', $td[n]);
     // }
   }
-  firstColArr.splice(0, 3);
-  randomBoxNumForSnake = Math.floor(Math.random()*firstColArr.length);
-  const headNumber = parseInt(firstColArr[randomBoxNumForSnake][0].id);
+
+  startLineNumbersArray.splice(0, 3); // take out top three tds
+  randomBoxNumForSnake = Math.floor(Math.random() * startLineNumbersArray.length);
+  const headNumber = parseInt(startLineNumbersArray[randomBoxNumForSnake][0].id);
   console.log('Making snake at', headNumber);
-  $chosenSnakeBoxObject = firstColArr[randomBoxNumForSnake];
-  // TODO: WHat is this???
+  $chosenSnakeBoxObject = startLineNumbersArray[randomBoxNumForSnake];
   snakeArr.push({
     positions: [headNumber],
     direction: 'right'
   });
-  addSnakeImg();
 }
 
 
 // TODO: Rob added this. What is it????!!!
+// TODO: How do I snakes moving??
 function moveSnakes() {
   $('.snake').removeClass('snake');
   snakeArr.forEach(snake => {
@@ -250,7 +251,7 @@ function moveSnakes() {
       const head = snakePositions[snakePositions.length - 1];
       snakePositions.push(head + 1);
       snakePositions.splice(0, 1);
-      if (snakePositions.length < 3) {
+      if (snakePositions.length < 4) {
         const tail = snakePositions[0];
         snakePositions.unshift(tail - 1);
       }
@@ -262,27 +263,8 @@ function moveSnakes() {
     });
   });
 }
-
-function addSnakeImg(){
-  $chosenSnakeBoxObject.prepend('<i class="fas fa-play-circle" id="snake-head"></i>');
-  $chosenSnakeBoxObject.addClass('snake-head');
-}
-
-function removeSnakeInArray(){
-  $('#snake-head').remove();
-  // snakeArr = [];
-  $chosenSnakeBoxObject.removeClass('snake-head');
-}
-
-
-
-
-
-function moveSnake(){
-  for(let i = 1; i < $tr[0].childElementCount; i++){
-    removeSnakeInArray();
-    snakeArr.push($chosenSnakeBoxObject[0].parentElement.cells[i]);
-    $chosenSnakeBoxObject = $(snakeArr[0]);
-    addSnakeImg();
-  }
-}
+// 
+// function addSnakeImg(){
+//   // $chosenSnakeBoxObject.prepend('<i class="fas fa-play-circle" id="snake-head"></i>');
+//   $chosenSnakeBoxObject.addClass('snake-head');
+// }
