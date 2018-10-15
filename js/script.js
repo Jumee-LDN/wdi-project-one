@@ -1,5 +1,6 @@
 const $body = $('body');
-const $lizardImg = $('#lizard');
+
+const $snakeHeadImg = $('#snake-head');
 const $messageBox = $('.message-box');
 let $currentBoxObject = $();
 let $newLizardObject = $();
@@ -10,6 +11,7 @@ let currentId;
 let lizardArr = [];
 
 let clickedStatus = false;
+let intervalId;
 
 // function gameStart(){
 //   gridGenerator(8,15);
@@ -29,6 +31,10 @@ function setButton() {
     if(clickedStatus){
       console.log('start button clicked');
       pickRandomSpotForLizard();
+      // game loop
+      intervalId = setInterval(function(){
+        detectCharacterMovement();
+      }, 1000/5);
       $buttonObject[0].textContent = 'Run!';
     } else {
       console.log('clicked again');
@@ -120,11 +126,11 @@ const keys = {
 // key detection (better to use addEventListener??)
 onkeyup = onkeydown = function(event){
   // prevent default browser handling of keypresses
-  if (event.preventDefault) {
-    event.preventDefault();
-  } else {
-    event.returnValue = false;
-  }
+  // if (event.preventDefault) {
+  //   event.preventDefault();
+  // } else {
+  //   event.returnValue = false;
+  // }
   const kc = event.keyCode || event.which;
   keys[kc] = event.type === 'keydown';
 };
@@ -151,10 +157,6 @@ const detectCharacterMovement = function(){
   }
 };
 
-// game loop
-const intervalId = setInterval(function(){
-  detectCharacterMovement();
-}, 1000/8);
 
 function moveLizardLeft(){
   currentId = parseInt($currentBoxObject.attr('id'));
@@ -187,12 +189,47 @@ function lizardOnWinningRow(){
   const $winningRowBoxes = $winningRow.children;
   $($winningRowBoxes).each(function(){
     let boxId = this.id;
-    
+
     if(boxId === $currentBoxObject[0].id){
+      $messageBox.css( {
+        'background-color': 'lightskyblue',
+        'color': 'white'
+      });
       $messageBox[0].textContent = '👍 You saved the baby lizard! 👍';
       clearInterval(intervalId);
     }
   });
 }
 
-// Snake Generator
+let firstColArr = [];
+const $td = $('td');
+const $tr = $('tr');
+let randomBoxNumForSnake;
+let chosenSnakeBoxObject;
+
+function snakeGenerator(){
+  pickRandomSpotForSnake();
+  addSnakeImg();
+  // firstColArr = [];
+}
+snakeGenerator();
+
+function pickRandomSpotForSnake(){
+  for(let n = 0; n < $td.length; n++){
+    if ((n % 15) === 0){
+      firstColArr.push($($td[n]));
+    }
+    // else if ((n + 1) % 15 === 0){
+    //   console.log('this is lastchild', $td[n]);
+    // }
+  }
+  firstColArr.splice(0, 3);
+  randomBoxNumForSnake = Math.floor(Math.random()*firstColArr.length);
+  chosenSnakeBoxObject = firstColArr[randomBoxNumForSnake];
+}
+
+
+function addSnakeImg(){
+  chosenSnakeBoxObject.prepend('<i class="fas fa-play-circle" id="snake-head"></i>');
+  chosenSnakeBoxObject.addClass('snake-head');
+}
