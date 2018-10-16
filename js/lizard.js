@@ -1,3 +1,7 @@
+const $td = $('td');
+const $tr = $('tr');
+let leftColNumbersArray = [];
+let rightColNumbersArray = [];
 
 function pickRandomSpotForLizard(){
   const $lastRow = $('table tr:last-child');
@@ -5,8 +9,7 @@ function pickRandomSpotForLizard(){
   const randomBoxNumber = Math.floor(Math.random() * lastRowLength);
 
   $currentLizardObject = $($lastRow[0].cells[randomBoxNumber]);
-  console.log('$currentLizardObject is :', $currentLizardObject);
-  // placeLizardObjectInArray($currentLizardObject);
+  // console.log('$currentLizardObject is :', $currentLizardObject);
 }
 
 function setLizardImgIn(){
@@ -46,23 +49,23 @@ const gameLoop = function(){
     moveLizardLeft();
     $messageBox[0].textContent = '🐍 Run!! 🐍';
     lizardOnWinningRow();
-    // lizardMeetsSnakes();
+    snakeGotLizard();
   }
   if ( keys[keys.RIGHT] ) {
     moveLizardRight();
     $messageBox[0].textContent = '🐍 Run!! 🐍';
     lizardOnWinningRow();
-    // lizardMeetsSnakes();
+    snakeGotLizard();
   }
   if ( keys[keys.UP] ) {
     moveLizardUp();
     $messageBox[0].textContent = '🐍 Run!! 🐍';
     lizardOnWinningRow();
-    // lizardMeetsSnakes();
+    snakeGotLizard();
   }
   if ( keys[keys.DOWN] ) {
-    // console.log('No turning back!');
     $messageBox[0].textContent = '😱 No turning back! 😱';
+    snakeGotLizard();
     // moveLizardDown();
   } else {
     return 'wrong key';
@@ -72,21 +75,26 @@ const gameLoop = function(){
 function moveLizardLeft(){
   currentId = parseInt($currentLizardObject.attr('id'));
   const newId = --currentId;
-  removeLizardImg();
-  // $currentLizardObject.attr('id',newId);
-  $currentLizardObject = $(`td#${newId}.grid-box`);
-  setLizardImgIn();
-  storeCurrentLizardObjectInArray($currentLizardObject);
+
+  //stop at left edge
+  if ((currentId % 15) !== 0){
+    removeLizardImg();
+    $currentLizardObject = $(`td#${newId}.grid-box`);
+    setLizardImgIn();
+    storeCurrentLizardObjectInArray($currentLizardObject);
+  }
 }
 
 function moveLizardRight(){
   currentId = parseInt($currentLizardObject.attr('id'));
   const newId = ++currentId;
-  removeLizardImg();
-  // $currentLizardObject.attr('id',newId);
-  $currentLizardObject = $(`td#${newId}.grid-box`);
-  setLizardImgIn();
-  storeCurrentLizardObjectInArray($currentLizardObject);
+  //stop at right edge
+  if ((currentId + 1) % 15 !== 0){
+    removeLizardImg();
+    $currentLizardObject = $(`td#${newId}.grid-box`);
+    setLizardImgIn();
+    storeCurrentLizardObjectInArray($currentLizardObject);
+  }
 }
 
 function moveLizardUp(){
@@ -104,9 +112,9 @@ function lizardOnWinningRow(){
   lizardArr = [];
   const $winningRowBoxes = $winningRow.children;
   $($winningRowBoxes).each(function(){
-    const boxId = this.id;
+    const lizardBoxId = this.id;
 
-    if(boxId === $currentLizardObject[0].id){
+    if(lizardBoxId === $currentLizardObject[0].id){
       $messageBox.css({
         'background-color': 'lightskyblue',
         'color': 'white'
@@ -123,4 +131,11 @@ function lizardOnWinningRow(){
       }, 1000);
     }
   });
+}
+
+function getLeftColNums(){
+  $.each( $tr, function( i ){
+    leftColNumbersArray.push(parseInt($tr[i].firstElementChild.textContent));
+  });
+  leftColNumbersArray.splice(0, 3); // take out top three tds
 }

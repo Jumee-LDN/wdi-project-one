@@ -94,7 +94,21 @@ h1{
   top: 0;
   left: 0;
   position: absolute;
-  color: green;
+}
+
+.dead-lizard {
+ animation-duration: 1s;
+ animation-name: blink;
+}
+
+@keyframes blink {
+  from {
+    background-color: red;
+  }
+
+  to {
+    background-color: peru;
+  }
 }
 
 .snake {

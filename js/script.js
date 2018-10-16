@@ -25,6 +25,7 @@ const intervalId = setInterval(function(){
 }, 1000/5);
 
 let snakeGeneratorIntervalId;
+let lizardStatusIntervalId;
 
 function setButton() {
   $buttonObject.click(function() {
@@ -32,13 +33,16 @@ function setButton() {
 
     if (clickedStatus) {
       console.log('start button clicked');
+      snakeArr = [];
       pickRandomSpotForLizard();
       setLizardImgIn();
       storeCurrentLizardObjectInArray($currentLizardObject);
-      snakeArr = [];
       snakeGeneratorIntervalId = setInterval(function(){
         snakeGenerator();
       }, 1000 * 5);
+      lizardStatusIntervalId = setInterval(function(){
+        snakeGotLizard();
+      }, 1000/5);
       $buttonObject[0].textContent = 'Reset';
     } else {
       console.log('clicked again');
