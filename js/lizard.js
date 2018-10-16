@@ -1,7 +1,5 @@
 const $td = $('td');
 const $tr = $('tr');
-let leftColNumbersArray = [];
-let rightColNumbersArray = [];
 
 function pickRandomSpotForLizard(){
   const $lastRow = $('table tr:last-child');
@@ -133,9 +131,11 @@ function lizardOnWinningRow(){
   });
 }
 
-function getLeftColNums(){
+let boundaryNumsArray = [];
+function getBoundaryColNums(){
   $.each( $tr, function( i ){
-    leftColNumbersArray.push(parseInt($tr[i].firstElementChild.textContent));
+    boundaryNumsArray.push(parseInt($tr[i].firstElementChild.textContent), parseInt($tr[i].lastElementChild.textContent));
   });
-  leftColNumbersArray.splice(0, 3); // take out top three tds
+  boundaryNumsArray.splice(0, 6);
 }
+getBoundaryColNums();
