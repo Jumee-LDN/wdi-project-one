@@ -44,18 +44,25 @@ const gameLoop = function(){
 
   if ( keys[keys.LEFT] ) {
     moveLizardLeft();
+    $messageBox[0].textContent = '🐍 Run!! 🐍';
     lizardOnWinningRow();
+    // lizardMeetsSnakes();
   }
   if ( keys[keys.RIGHT] ) {
     moveLizardRight();
+    $messageBox[0].textContent = '🐍 Run!! 🐍';
     lizardOnWinningRow();
+    // lizardMeetsSnakes();
   }
   if ( keys[keys.UP] ) {
     moveLizardUp();
+    $messageBox[0].textContent = '🐍 Run!! 🐍';
     lizardOnWinningRow();
+    // lizardMeetsSnakes();
   }
   if ( keys[keys.DOWN] ) {
-    console.log('No turning back!');
+    // console.log('No turning back!');
+    $messageBox[0].textContent = '😱 No turning back! 😱';
     // moveLizardDown();
   } else {
     return 'wrong key';
@@ -92,6 +99,7 @@ function moveLizardUp(){
   storeCurrentLizardObjectInArray($currentLizardObject);
 }
 
+
 function lizardOnWinningRow(){
   lizardArr = [];
   const $winningRowBoxes = $winningRow.children;
@@ -109,12 +117,10 @@ function lizardOnWinningRow(){
       removeLizardImg();
 
       setTimeout(function(){
-        snakeGenerator();
         pickRandomSpotForLizard();
         setLizardImgIn();
         storeCurrentLizardObjectInArray($currentLizardObject);
       }, 1000);
-      // clearInterval(intervalId);
     }
   });
 }

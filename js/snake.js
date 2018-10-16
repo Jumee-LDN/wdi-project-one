@@ -31,13 +31,12 @@ function pickRandomSpotForSnake(){
   }
 
   startLineNumbersArray.splice(0, 3); // take out top three tds
-  console.log(`startLineNumberArray is: ${startLineNumbersArray.length}`);
+  // console.log(`startLineNumberArray is: ${startLineNumbersArray.length}`);
   randomBoxNumForSnake = Math.floor(Math.random() * startLineNumbersArray.length);
 }
 
 
 // TODO: Rob added this. What is it????!!!
-// function to cancle the function
 
 function moveSnakes() {
   $('.snake').removeClass('snake');
@@ -74,3 +73,32 @@ function moveSnakes() {
     //add style to $(box107)
   });
 }
+
+// Lizard meets snake
+//
+// function lizardMeetsSnakes(){
+//   lizardArr = [];
+//   const $winningRowBoxes = $winningRow.children;
+//   $($winningRowBoxes).each(function(){
+//     const boxId = this.id;
+//
+//     if(boxId === $currentLizardObject[0].id){
+//       $messageBox.css({
+//         'background-color': 'lightskyblue',
+//         'color': 'white'
+//       });
+//       $messageBox[0].textContent = '👍 You saved the baby lizard! 👍';
+//       scoreNum++;
+//       $('div.score-box > span')[0].textContent = scoreNum;
+//       removeLizardImg();
+//
+//       setTimeout(function(){
+//         pickRandomSpotForLizard();
+//         setLizardImgIn();
+//         storeCurrentLizardObjectInArray($currentLizardObject);
+//       }, 1000);
+//     }
+//   });
+// }
+//
+// snakeArr[i].positions[j];
