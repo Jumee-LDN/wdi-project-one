@@ -1,6 +1,6 @@
 const $body = $('body');
 const $messageBox = $('.message-box');
-const $buttonObject = $('.button');
+const $buttonObject = $('.start-button');
 let $winningRow;
 let $currentLizardObject = $();
 
@@ -53,10 +53,10 @@ function setButton() {
       $buttonObject[0].textContent = 'Run';
       $('div.score-box > span')[0].textContent = 0;
       $messageBox[0].textContent = '🦎🦎🦎 Save baby lizards! 🦎🦎🦎';
-      $messageBox.css( {
-        'background-color': 'white',
-        'color': 'black'
-      });
+      // $messageBox.css( {
+      //   'background-color': '#E0E0E0',
+      //   'color': 'black'
+      // });
     }
   });
 }

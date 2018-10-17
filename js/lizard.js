@@ -36,6 +36,12 @@ const keys = {
 
 // key detection (better to use addEventListener??)
 onkeyup = onkeydown = function(event){
+  /// prevent default browser handling of keypresses
+  if (event.preventDefault) {
+    event.preventDefault();
+  } else {
+    event.returnValue = false;
+  }
   const kc = event.keyCode || event.which;
   keys[kc] = event.type === 'keydown';
 };
@@ -117,8 +123,8 @@ function lizardOnWinningRow(){
 
     if(lizardBoxId === $currentLizardObject[0].id){
       $messageBox.css({
-        'background-color': '#686868',
-        'color': 'white'
+        'background-color': 'rgba(240,240,240)',
+        'color': 'black'
       });
       $messageBox[0].textContent = '👍 You saved the baby lizard! 👍';
       scoreNum++;
