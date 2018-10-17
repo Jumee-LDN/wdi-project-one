@@ -96,7 +96,7 @@ function gridGenerator(rows, cols){
   }
   seaAreaGenerator(2);
 }
-// 
+//
 // function clearLastRowFromSnakes(){
 //   lastrow.removeClass('snake');
 // }

@@ -117,7 +117,7 @@ function lizardOnWinningRow(){
 
     if(lizardBoxId === $currentLizardObject[0].id){
       $messageBox.css({
-        'background-color': 'lightskyblue',
+        'background-color': '#686868',
         'color': 'white'
       });
       $messageBox[0].textContent = '👍 You saved the baby lizard! 👍';
