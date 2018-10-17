@@ -94,8 +94,11 @@ function snakeGotLizard(){
     // $currentLizardObject.css('background-color', 'red');
     $currentLizardObject.toggleClass('dead-lizard');
     lizardArr = [];
+    $('div.score-box > span')[0].textContent = '- 1';
     removeLizardImg();
     setTimeout(function(){
+      scoreNum--;
+      $('div.score-box > span')[0].textContent = scoreNum;
       pickRandomSpotForLizard();
       setLizardImgIn();
       storeCurrentLizardObjectInArray($currentLizardObject);

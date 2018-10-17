@@ -1,6 +1,6 @@
 const $td = $('td');
 const $tr = $('tr');
-
+const $scoreBox = $('div.score-box');
 
 function pickRandomSpotForLizard(){
   const $lastRow = $('table tr:last-child');
@@ -49,7 +49,6 @@ onkeyup = onkeydown = function(event){
 // character control
 const gameLoop = function(){
   moveSnakes();
-
   if ( keys[keys.LEFT] ) {
     moveLizardLeft();
     $messageBox[0].textContent = '🐍 Run!! 🐍';
@@ -122,16 +121,21 @@ function lizardOnWinningRow(){
     const lizardBoxId = this.id;
 
     if(lizardBoxId === $currentLizardObject[0].id){
-      $messageBox.css({
-        'background-color': 'rgba(240,240,240)',
-        'color': 'black'
-      });
+      // $messageBox.css({
+      //   'background-color': 'rgba(240,240,240)',
+      //   'color': 'black'
+      // });
+      $messageBox.toggleClass('shake-message-box');
+      $scoreBox.toggleClass('shake-score-box');
       $messageBox[0].textContent = '👍 You saved the baby lizard! 👍';
-      scoreNum++;
-      $('div.score-box > span')[0].textContent = scoreNum;
+      $('div.score-box > span')[0].textContent = '+ 1';
       removeLizardImg();
 
       setTimeout(function(){
+        scoreNum++;
+        $('div.score-box > span')[0].textContent = scoreNum;
+        $messageBox.removeClass('shake-message-box');
+        $scoreBox.removeClass('shake-score-box');
         pickRandomSpotForLizard();
         setLizardImgIn();
         storeCurrentLizardObjectInArray($currentLizardObject);

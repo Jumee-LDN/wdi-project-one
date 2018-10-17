@@ -1,5 +1,5 @@
 .parallax-window {
-    min-height: 400px;
+    min-height: 500px;
     background: transparent;
 }
 
@@ -16,19 +16,57 @@ header {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  height: 15rem;
+  height: 6rem;
   background-color: black;
 }
 
+#youtube{
+  position: relative;
+  /* width: 120%
+  height: 1000px; */
+}
+
+.videoContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+iframe {
+  /* optional */
+  width: 100%;
+  height: 100%;
+}
+
+footer {
+  height: 120px;
+  background-color: black;
+  font-weight: 300;
+  color: rgba(224,224,224,1);
+  text-align: center;
+  font-size: 0.7rem;
+  margin-top: 30px;
+}
+
+
 h1{
   font-size: 2.5rem;
-  font-weight: 600;
+  font-weight: 400;
   margin: 0;
-  color: rgba(224,224,224,1)
+  color: rgba(224,224,224,1);
+  letter-spacing: 3.5px;
 }
 
 .vs {
-  color: #48854a;
+  color: rgba(73,133,73);
   font-weight: 300;
 }
 
@@ -46,11 +84,22 @@ button{
 }
 
 .bbc-logo{
-  width: 4rem;
-  height: 4rem;
+  width: 3.5rem;
+  height: 3.5rem;
   background: url( '../images/BBC_Earth_logo.png' ) no-repeat;
   background-size: contain;
   background-position: center;
+}
+
+
+.ga-logo {
+  background: url( '../images/ga-logo.png' ) no-repeat;
+  display: inline-block;
+  width: 2rem;
+  height: 40px;
+  background-size: contain;
+  background-position: center;
+  margin-top: 5px;
 }
 
 .wrapper {
@@ -67,11 +116,18 @@ button{
   font-weight: 700;
   width: 5rem;
   height: 3rem;
+  color: rgba(73,133,73);
   background-color: rgba(240,240,240);
   border-radius: 20px;
   border-style: none;
   outline: none;
   margin: 0 15px;
+}
+
+.start-button:hover {
+  background-image: linear-gradient(-45deg, rgba(73,133,73), rgba(0,156,204));
+  color: white;
+  font-weight: 600;
 }
 
 .message-box {
@@ -89,6 +145,7 @@ button{
   padding: 5px;
   line-height: 2rem;
 }
+
 
 .score-box {
   font-family: 'Nunito', sans-serif;
@@ -109,6 +166,37 @@ button{
   font-weight: 900;
 }
 
+.shake-message-box{
+  animation: shake 0.3s infinite;
+  border-color: rgba(73,133,73);
+}
+
+.gameover-message-box{
+  animation: shake 0.3s;
+  background-image: linear-gradient(-45deg, rgba(81,55,144), rgba(239,56,68));
+}
+
+.shake-score-box{
+  animation: shake 0.1s infinite;
+  border-color: rgba(73,133,73);
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(3deg);
+  }
+  35% {
+    transform: rotate(0deg);
+  }
+  70% {
+    transform: rotate(-3deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+
+}
+
 .grid{
   margin: 0 auto;
   color: rgba(0, 0, 0, 0);
@@ -119,18 +207,25 @@ button{
   width: 1.5rem;
   height: 1.5rem;
   position: relative;
-  /* border: 0.5px solid #ccc; */
+  border: 0.1rem solid rgba(184,184,184);
   text-align:center;
   font-family:sans-serif;
   font-size: 10px;
   background-color: #E0E0E0;
 }
 
+
 .sea {
+  background-image: url( '../images/sea-waves.png' );
+  background-size: contain;
+  background-position: center;
   background-color: #B8B8B8;
 }
 
 .rock {
+  background-image: url( '../images/rock.png' );
+  background-size: contain;
+  background-position: center;
   background-color: #686868;
 }
 
@@ -151,14 +246,14 @@ button{
 
 @keyframes blink {
   from {
-    background-color: #181818;
+    background-color: black;
   }
 
   to {
-    background-color: rgba(240,240,240);
+    background-color: white;
   }
 }
 
 .snake {
-  background-color: green;
+  background-color: rgba(73,133,73);
 }

@@ -14,15 +14,11 @@ let scoreNum = 0;
 let lizardArr = [];
 let clickedStatus = false;
 
-
 gridGenerator(15,20);
 setButton();
 
-const intervalId = setInterval(function(){
+setInterval(function(){
   gameLoop();
-  //remove snake style on the last row
-  // const $lastRow = $table[0].lastElementChild;
-
 }, 1000/6);
 
 let snakeGeneratorIntervalId;
@@ -40,7 +36,7 @@ function setButton() {
       storeCurrentLizardObjectInArray($currentLizardObject);
       snakeGeneratorIntervalId = setInterval(function(){
         snakeGenerator();
-      }, 1000 * Math.floor(Math.random() * 10 + 4));
+      }, 1000 * Math.floor(Math.random() * 10 + 5));
       lizardStatusIntervalId = setInterval(function(){
         snakeGotLizard();
       }, 1000/5);
@@ -52,11 +48,8 @@ function setButton() {
       snakeArr = [];
       $buttonObject[0].textContent = 'Run';
       $('div.score-box > span')[0].textContent = 0;
-      $messageBox[0].textContent = '🦎🦎🦎 Save baby lizards! 🦎🦎🦎';
-      // $messageBox.css( {
-      //   'background-color': '#E0E0E0',
-      //   'color': 'black'
-      // });
+      scoreNum = 0;
+      $messageBox[0].textContent = '🦎🦎🦎 Save baby iguanas! 🦎🦎🦎';
     }
   });
 }
@@ -96,7 +89,3 @@ function gridGenerator(rows, cols){
   }
   seaAreaGenerator(2);
 }
-//
-// function clearLastRowFromSnakes(){
-//   lastrow.removeClass('snake');
-// }
