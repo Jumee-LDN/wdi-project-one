@@ -1,6 +1,5 @@
 const $body = $('body');
 const $messageBox = $('.message-box');
-const $snakeHeadImg = $('#snake-head');
 const $buttonObject = $('.button');
 let $winningRow;
 let $currentLizardObject = $();
@@ -14,15 +13,17 @@ const imageArray = [
 let scoreNum = 0;
 let lizardArr = [];
 let clickedStatus = false;
-let currentId;
 
 
-gridGenerator(10,15);
+gridGenerator(15,20);
 setButton();
 
 const intervalId = setInterval(function(){
   gameLoop();
-}, 1000/5);
+  //remove snake style on the last row
+  // const $lastRow = $table[0].lastElementChild;
+
+}, 1000/6);
 
 let snakeGeneratorIntervalId;
 let lizardStatusIntervalId;
@@ -39,7 +40,7 @@ function setButton() {
       storeCurrentLizardObjectInArray($currentLizardObject);
       snakeGeneratorIntervalId = setInterval(function(){
         snakeGenerator();
-      }, 1000 * 5);
+      }, 1000 * Math.floor(Math.random() * 10 + 4));
       lizardStatusIntervalId = setInterval(function(){
         snakeGotLizard();
       }, 1000/5);
@@ -95,3 +96,7 @@ function gridGenerator(rows, cols){
   }
   seaAreaGenerator(2);
 }
+// 
+// function clearLastRowFromSnakes(){
+//   lastrow.removeClass('snake');
+// }

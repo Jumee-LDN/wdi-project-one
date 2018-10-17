@@ -1,6 +1,7 @@
 const $td = $('td');
 const $tr = $('tr');
 
+
 function pickRandomSpotForLizard(){
   const $lastRow = $('table tr:last-child');
   const lastRowLength = $lastRow[0].cells.length;
@@ -72,34 +73,36 @@ const gameLoop = function(){
 
 function moveLizardLeft(){
   currentId = parseInt($currentLizardObject.attr('id'));
-  const newId = --currentId;
-
-  //stop at left edge
-  if ((currentId % 15) !== 0){
+  let newId;
+  if (!leftBoundaryNumsArray.includes(currentId)){
     removeLizardImg();
+    newId = --currentId;
     $currentLizardObject = $(`td#${newId}.grid-box`);
     setLizardImgIn();
     storeCurrentLizardObjectInArray($currentLizardObject);
   }
+
 }
 
 function moveLizardRight(){
   currentId = parseInt($currentLizardObject.attr('id'));
-  const newId = ++currentId;
-  //stop at right edge
-  if ((currentId + 1) % 15 !== 0){
-    removeLizardImg();
-    $currentLizardObject = $(`td#${newId}.grid-box`);
-    setLizardImgIn();
-    storeCurrentLizardObjectInArray($currentLizardObject);
+  removeLizardImg();
+  let newId
+  if (!rightBoundaryNumsArray.includes(currentId)){
+    newId = ++currentId;
+  } else {
+    newId = currentId;
   }
+  $currentLizardObject = $(`td#${newId}.grid-box`);
+  setLizardImgIn();
+  storeCurrentLizardObjectInArray($currentLizardObject);
 }
 
 function moveLizardUp(){
   currentId = parseInt($currentLizardObject.attr('id'));
-  const newId = currentId-15;
+  const newId = currentId - $tr[0].childElementCount;
+  // console.log('currentId is: ', currentId, ' $tr[0].childElementCount is:',  $tr[0].childElementCount);
   removeLizardImg();
-  // $currentLizardObject.attr('id',newId);
   $currentLizardObject = $(`td#${newId}.grid-box`);
   setLizardImgIn();
   storeCurrentLizardObjectInArray($currentLizardObject);
@@ -130,12 +133,21 @@ function lizardOnWinningRow(){
     }
   });
 }
+let leftBoundaryNumsArray = [];
+let rightBoundaryNumsArray = [];
 
-let boundaryNumsArray = [];
-function getBoundaryColNums(){
+function getLeftBoundaryColNums(){
   $.each( $tr, function( i ){
-    boundaryNumsArray.push(parseInt($tr[i].firstElementChild.textContent), parseInt($tr[i].lastElementChild.textContent));
+    leftBoundaryNumsArray.push(parseInt($tr[i].firstElementChild.textContent));
   });
-  boundaryNumsArray.splice(0, 6);
+  leftBoundaryNumsArray.splice(0, 3);
 }
-getBoundaryColNums();
+function getRightBoundaryColNums(){
+  $.each( $tr, function( i ){
+    rightBoundaryNumsArray.push(parseInt($tr[i].lastElementChild.textContent));
+  });
+  rightBoundaryNumsArray.splice(0, 3);
+}
+
+getLeftBoundaryColNums();
+getRightBoundaryColNums();

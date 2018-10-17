@@ -18,13 +18,12 @@ function snakeGenerator(){
   });
 }
 
-
-
 function pickRandomSpotForSnake(){
 
   for(let n = 0; n < $td.length; n++){
-    if ((n % 15) === 0){
+    if (n % ($tr[0].children.length) === 0){
       startLineNumbersArray.push($($td[n]));
+
     }
   }
   startLineNumbersArray.splice(0, 3); // take out top three tds
@@ -35,7 +34,7 @@ function pickRandomSpotForSnake(){
 
 
 // TODO: Rob added this. What is it????!!!
-const snakeLimit = [135];
+const snakeLimit = [280];
 
 function moveSnakes() {
   $('.snake').removeClass('snake');
@@ -48,29 +47,29 @@ function moveSnakes() {
       const head = snakePositions[snakePositions.length - 1];
       //snakePositions.length = 1
       //head = snakePositions[0]
-      // console.log(head);
-      if(!snakeLimit.includes(head)) {
-        snakePositions.push(head + 1);
-        //[106].push(106 + 1)
-        //[106, 107]
-        snakePositions.splice(0, 1);
-        //[107]
-      } else {
-        const wall = snakeLimit[snakeLimit.indexOf(head)];
-        console.log('this is where the snake hit ->', wall);
-        // snake has hit the wall
-        // need to remove tail from snake then delete it.
-
-
-        // for(let i = 3; i > -1; i--){
-        //   setInterval(function(){
-        //     console.log(wall - i);
-        //     $($td[wall - i]).removeClass('snake');
-        //   }, 1000);
-        // }
-      }
-
-      if (snakePositions.length < 4) {
+      snakePositions.push(head + 1);
+      snakePositions.splice(0, 1);
+      // if(!snakeLimit.includes(head)) {
+      //   snakePositions.push(head + 1);
+      //   //[106].push(106 + 1)
+      //   //[106, 107]
+      //   snakePositions.splice(0, 1);
+      //   //[107]
+      // } else {
+      //   const wall = snakeLimit[snakeLimit.indexOf(head)];
+      //   console.log('this is where the snake hit ->', wall);
+      //   // snake has hit the wall
+      //   // need to remove tail from snake then delete it.
+      //
+      //   // for(let i = 3; i > -1; i--){
+      //   //   setInterval(function(){
+      //   //     console.log(wall - i);
+      //   //     $($td[wall - i]).removeClass('snake');
+      //   //   }, 1000/6);
+      //   // }
+      // }
+      let randomSnakeLenght = Math.floor(Math.random() * 7 + 2);
+      if (snakePositions.length < randomSnakeLenght - 2) {
         const tail = snakePositions[0];
         //tail = 107
         snakePositions.unshift(tail - 1);
