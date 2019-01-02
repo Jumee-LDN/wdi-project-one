@@ -63,7 +63,31 @@ Save iguanas as many as possible. The score goes up every time when an iguana is
 | Day 6   | Refactoring, bug fixing and deployment              |
 | Day 7   | Presentation                                        |
 
-**Lessons**
+#### Challenge
+It was challenging to automate the snakes to move along the grid to the end point while keeping the form of its head and tail, also the length changes to add a visual effect.
+```javascript
+
+function moveSnakes() {
+  $('.snake').removeClass('snake');
+  snakeArr.forEach(snake => {
+    if (snake.direction === 'right') {
+      const snakePositions = snake.positions;
+      const head = snakePositions[snakePositions.length - 1];
+      snakePositions.push(head + 1);
+      snakePositions.splice(0, 1);
+      let randomSnakeLenght = Math.floor(Math.random() * 7 + 2);
+      if (snakePositions.length < randomSnakeLenght - 2) {
+        const tail = snakePositions[0];
+        snakePositions.unshift(tail - 1);
+      }
+    }
+    snake.positions.forEach(snakePiece => {
+      $(`#${snakePiece}`).addClass('snake');
+    });
+  });
+}
+```
+#### Lessons learned
 - Plans are made to be broken. Plan it again and again.
 - Simultaneous refactoring is better.
 
