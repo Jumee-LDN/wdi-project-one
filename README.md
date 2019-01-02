@@ -52,7 +52,8 @@ Save iguanas as many as possible. The score goes up every time when an iguana is
 ![screenshots](screenshots/IvS.gif
 )
 
-## Approach and Lessons Learned
+## Project Log
+#### Approach
 | Time    | Action                                              |
 | ------- |:---------------------------------------------------:|
 | Day 1   | Project concept, wireframe and code planning        |
@@ -63,7 +64,7 @@ Save iguanas as many as possible. The score goes up every time when an iguana is
 | Day 6   | Refactoring, bug fixing and deployment              |
 | Day 7   | Presentation                                        |
 
-#### Challenge
+#### Challenges
 It was challenging to automate the snakes to move along the grid to the end point while keeping the form of its head and tail, also the length changes to add a visual effect.
 ```javascript
 
@@ -88,12 +89,11 @@ function moveSnakes() {
 }
 ```
 #### Lessons learned
-- Plans are made to be broken. Plan it again and again.
+- Are plans made to be broken? Replan and reschedule the project more than once.
 - Simultaneous refactoring is better.
 
 ## Bugs
-- The game does not end.
-- The score goes down to minus.
+No game over. The score goes down to minus.
 
 ## Technologies Used
 
