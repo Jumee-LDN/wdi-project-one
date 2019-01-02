@@ -1,10 +1,10 @@
 # IGUANA vs SNAKES
 
 ## GA Project 1
-This was the first project during my time on Web Development Immersive course at General Assembly, 12 weeks of full-time. The project took place in the week 4. [>>Play here<<](https://jumee-ldn.github.io/wdi-project-one/)
+This was the first project during my time on Web Development Immersive course (12 weeks of full-time) at General Assembly. The project took place in the week 4. [>>Play here<<](https://jumee-ldn.github.io/wdi-project-one/)
 
 **Note**
-- The site is desktop first.
+- the app is not yet fully responsive. For best experience open on laptop.
 - The site may load slower than the average(2-3 seconds) loading time.
 
 #### Course Curriculum :
@@ -92,7 +92,7 @@ function moveSnakes() {
 - Are plans made to be broken? Replan and reschedule the project more than once.
 - Simultaneous refactoring is better.
 
-## Bugs
+## Bugs / Moving Forward
 No game over. The score goes down to minus.
 
 ## Technologies Used
@@ -133,6 +133,7 @@ Please see below for the details of my training and links to more projects.
 - Express.js
 - EJS
 - MongoDB
+- User Authentication
 
 > **Week 6**
 
