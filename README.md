@@ -124,7 +124,7 @@ Please see below for the details of my training and links to more projects.
 
 > **Week 4**
 
-- *Project 1* : Iguana vs Snakes | [GitHub](https://github.com/Jumee-LDN/wdi-project-one) |
+- *Project 1* : **Iguana vs Snakes** | [GitHub](https://github.com/Jumee-LDN/wdi-project-one) |
 [Play Link](https://jumee-ldn.github.io/wdi-project-one/)
 
 > **Week 5** | Module Two
@@ -137,7 +137,7 @@ Please see below for the details of my training and links to more projects.
 
 > **Week 6**
 
-- *Project 2* : hungry korilla | [GitHub](https://github.com/Jumee-LDN/wdi-project-two) |
+- *Project 2* : **hungry korilla** | [GitHub](https://github.com/Jumee-LDN/wdi-project-two) |
 [Heroku](https://hungrykorilla.herokuapp.com/)
 
 > **Week 7-8** | Module Three
@@ -149,7 +149,7 @@ Please see below for the details of my training and links to more projects.
 
 > **Week 9**
 
-- *Project 3* : xhibit | [GitHub](https://github.com/Jumee-LDN/wdi-project-3) |
+- *Project 3* : **xhibit** | [GitHub](https://github.com/Jumee-LDN/wdi-project-3) |
 [Heroku](https://xhibit.herokuapp.com/#!/)
 
 > **Week 10-11** | Module Four
@@ -160,5 +160,5 @@ Please see below for the details of my training and links to more projects.
 
 > **Week 12**
 
-- *Project 4* : Nomad | [GitHub](https://github.com/Jumee-LDN/wdi-project-four) |
+- *Project 4* : **Nomad** | [GitHub](https://github.com/Jumee-LDN/wdi-project-four) |
 [Heroku](https://nomad-ga.herokuapp.com/)
