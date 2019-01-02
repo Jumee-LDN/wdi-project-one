@@ -2,7 +2,8 @@
 
 ## GA Project 1
 This was the first project during my time on Web Development Immersive course at General Assembly, 12 weeks of full-time. The project took place in the week 4.</br>
-#### The course curriculum:
+#### The course curriculum
+
 > Week 1-3
 - Fundamentals of:
 - HTML5
@@ -35,7 +36,7 @@ The score goes up every time when an iguana is on a rocky line and the number go
 
 
 
-# code snippets
+## code snippets
 inline `function()` linke this
 
 ``` javascript
@@ -45,7 +46,7 @@ function(){
   return message;
 }
 ```
-# technologies used
+## technologies used
 
 * JavaScript
 * jQuery
@@ -53,8 +54,11 @@ function(){
 * CSS3
 
 
-#### The course curriculum:
+***
+
+### The course curriculum
 > **Week 1-3**
+
 - Fundamentals of:
 - HTML5
 - CSS3 and Animation
@@ -63,16 +67,30 @@ function(){
 - jQuery
 
 > **Week 4**
+
 - Project 1: Iguana vs Snakes | [GitHub](https://github.com/Jumee-LDN/wdi-project-one) |
 [Play Link](https://jumee-ldn.github.io/wdi-project-one/)
 
 > **Week 5**
+
 - Fundamentals of:
 - Node.js
 - Express.js
 - EJS
 - MongoDB
 
-
 > **Week 6**
-- Project 2: hungry korilla
+
+- Project 2: hungry korilla | [GitHub](https://github.com/Jumee-LDN/wdi-project-two) |
+[Heroku](https://hungrykorilla.herokuapp.com/)
+
+> **Week 7-8**
+
+- Angular
+- Token Authentication
+-
+
+> **Week 9**
+
+- Project 3: xhibit | [GitHub](https://github.com/Jumee-LDN/wdi-project-3) |
+[Heroku](https://xhibit.herokuapp.com/#!/)
