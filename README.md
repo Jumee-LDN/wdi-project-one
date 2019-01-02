@@ -7,7 +7,7 @@ This was the first project during my time on Web Development Immersive course at
 - The site is desktop first.
 - The site may load slower than the average(2-3 seconds) loading time.
 
-#### Course curriculum :
+#### Course Curriculum :
 
 > **Week 1-3** | Module One
 
@@ -23,10 +23,10 @@ This was the first project during my time on Web Development Immersive course at
 
 ## Brief
 Design a grid base game that works in the users browser. Players must be able to win and lose. The game should be built using HTML5, CSS3 and Javascript (jQuery).</br>
-**Time limit :** 7 days
+**Timeframe :** 1 week (October 2018)
 
 ## Concept
-Inspired by BBC television series Planet Earth, I built a grid-based geography game which requires players to use the arrow keys to save baby iguanas from hungry snakes.
+Inspired by BBC television series Planet Earth, I built a grid-based game which requires players to use the arrow keys to save baby iguanas from hungry snakes.
 
 ## Goal
 Build an initial make-believe BBC game site which could develop further as a whole series of nature documentary inspired games.
@@ -52,20 +52,42 @@ Save iguanas as many as possible. The score goes up every time when an iguana is
 ![screenshots](screenshots/IvS.gif
 )
 
+## Approach and Lessons Learned
+| Time    | Action                                              |
+| ------- |:---------------------------------------------------:|
+| Day 1   | Project concept, wireframe and code planning        |
+| Day 2   | Create `gridGenerator(15,20);` and iguana in control|
+| Day 3   | Generate random snakes and set clash condition      |
+| Day 4   | Set a boundary for iguana and display score         |
+| Day 5   | Style and animation                                 |
+| Day 6   | Refactoring, bug fixing and deployment              |
+| Day 7   | Presentation                                        |
+
+**Lessons**
+- Plans are made to be broken. Plan it again and again.
+- Simultaneous refactoring is better.
+
 ## Bugs
 - The game does not end.
 - The score goes down to minus.
 
-## technologies used
+## Technologies Used
 
-* JavaScript
+* Javascript (ECMAScript6)
 * jQuery
 * HTML5
-* CSS3
+* CSS3 & CSS Animation
+* GitHub
+
+## License
+
+[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
+
+- **[MIT license](http://opensource.org/licenses/mit-license.php)**
 
 ***
 
-## Course curriculum
+## Course Curriculum
 Please see below for the details of my training and links to more projects.
 
 > **Week 1-3** | Module One
