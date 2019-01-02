@@ -1,10 +1,10 @@
 # IGUANA vs SNAKES
 
 ## GA Project 1
-This was the first project during my time on Web Development Immersive course (12 weeks of full-time) at General Assembly. The project took place in the week 4. [>>Play here<<](https://jumee-ldn.github.io/wdi-project-one/)
+This was the first project during my time on the Web Development Immersive course (12 weeks of full-time) at General Assembly. The project took place in the week 4. [>>Play here<<](https://jumee-ldn.github.io/wdi-project-one/)
 
 **Note**
-- the app is not yet fully responsive. For best experience open on laptop.
+- The app is not yet fully responsive. For best experience open on the laptop.
 - The site may load slower than the average(2-3 seconds) loading time.
 
 #### Course Curriculum :
@@ -22,7 +22,7 @@ This was the first project during my time on Web Development Immersive course (1
 ***
 
 ## Brief
-Design a grid base game that works in the users browser. Players must be able to win and lose. The game should be built using HTML5, CSS3 and Javascript (jQuery).</br>
+Design a grid-based game that works in the user's browser. Players must be able to win and lose. The game should be built using HTML5, CSS3, and Javascript (jQuery).</br>
 **Timeframe :** 1 week (October 2018)
 
 ## Concept
@@ -65,7 +65,7 @@ Save iguanas as many as possible. The score goes up every time when an iguana is
 | Day 7   | Presentation                                        |
 
 #### Challenges
-It was challenging to automate the snakes to move along the grid to the end point while keeping the form of its head and tail, also the length changes to add a visual effect.
+It was challenging to automate the snakes to move along the grid to the end point while keeping the form of its head and tail.
 ```javascript
 
 function moveSnakes() {
