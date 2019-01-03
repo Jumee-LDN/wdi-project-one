@@ -144,7 +144,7 @@ Please see below for the details of my training and links to more projects.
 
 - Angular
 - Token Authentication & Session Authentication
-- Using external API
+- Third-party APIs
 - Mocha and Chai
 
 > **Week 9**
@@ -162,3 +162,11 @@ Please see below for the details of my training and links to more projects.
 
 - *Project 4* : **Nomad** | [GitHub](https://github.com/Jumee-LDN/wdi-project-four) |
 [Heroku](https://nomad-ga.herokuapp.com/)
+
+***
+
+## Contact
+#### Jumee Lee
+Email : jumeelee.london@gmail.com
+
+[Portfolio](https://jumeelee.co.uk/) | [LinkedIn](https://www.linkedin.com/in/jumeelee/) | [GitHub](https://github.com/Jumee-LDN)
