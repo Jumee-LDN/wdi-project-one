@@ -142,7 +142,7 @@ Please see below for the details of my training and links to more projects.
 
 > **Week 7-8** | Module Three
 
-- Angular
+- AngularJS
 - Token Authentication & Session Authentication
 - Third-party APIs
 - Mocha and Chai
