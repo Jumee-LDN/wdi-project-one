@@ -22,7 +22,7 @@ This was the first project during my time on the Web Development Immersive cours
 ***
 
 ## Brief
-Design a grid-based game that works in the user's browser. Players must be able to win and lose. The game should be built using HTML5, CSS3, and Javascript (jQuery).</br>
+Design a grid-based game that works in the user's browser. Players must be able to win and lose. The game should be built using HTML5, CSS3, and JavaScript (jQuery).</br>
 **Timeframe :** 1 week (October 2018)
 
 ## Concept
@@ -90,14 +90,14 @@ function moveSnakes() {
 ```
 #### Lessons learned
 - Are plans made to be broken? Replan and reschedule the project more than once.
-- Simultaneous refactoring is better.
+- Simultaneous refactoring is better than all at once in the end.
 
 ## Bugs / Moving Forward
 No game over. The score goes down to minus.
 
 ## Technologies Used
 
-* Javascript (ECMAScript6)
+* JavaScript (ECMAScript6)
 * jQuery
 * HTML5
 * CSS3 & CSS Animation
