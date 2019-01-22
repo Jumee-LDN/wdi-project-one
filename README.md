@@ -29,7 +29,7 @@ Design a grid-based game that works in the user's browser. Players must be able 
 Inspired by BBC television series Planet Earth, I built a grid-based game which requires players to use the arrow keys to save baby iguanas from hungry snakes.
 
 ## Goal
-Build an initial make-believe BBC game site which could develop further as a whole series of nature documentary inspired games.
+Build an initial make-believe BBC game site which could develop further as a whole series of nature documentary inspired games. Practice how to think like a developer based on what I learned in week 1-3. For example, how do I create a snake from a random position and make them move from point A to B?
 
 ## Visuals
 parallax.js used.
